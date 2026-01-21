@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Business Profit & Subsidy Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; background: #f4f7f6; }
+    .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    h1, h3 { text-align: center; color: #333; }
+    
+    /* Mode Selection Buttons */
+    .mode-switch { display: flex; gap: 10px; margin-bottom: 20px; }
+    .mode-switch button { flex: 1; padding: 12px; cursor: pointer; border: none; border-radius: 5px; font-weight: bold; background: #ddd; }
+    .mode-switch button.active { background: #007bff; color: white; }
+
+    input, select, .calc-btn { width: 100%; padding: 12px; margin: 8px 0; box-sizing: border-box; border: 1px solid #ccc; border-radius: 5px; }
+    .calc-btn { background: #28a745; color: white; border: none; cursor: pointer; font-size: 16px; }
+    
+    .result-area { margin-top: 20px; padding: 15px; background: #e9ecef; border-radius: 5px; }
+    .lead-box { border: 2px dashed #007bff; padding: 15px; margin-top: 20px; text-align: center; background: #f0f8ff; }
+    .disclaimer { font-size: 12px; color: #666; margin-top: 20px; text-align: center; }
+    #simpleMode, #advancedMode { display: none; }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Profit Calculator</h1>
+    
+    <div class="mode-switch">
+      <button id="btnSimple" onclick="showSimple()">Simple Mode</button>
+      <button id="btnAdvanced" onclick="showAdvanced()">Advanced Mode</button>
+    </div>
+
+    <div id="simpleMode">
+      <h3>Simple Profit Calculator</h3>
+      <input id="simpleSales" type="number" placeholder="Monthly Sales (₹)">
+      <input id="simpleCost" type="number" placeholder="Monthly Expenses (₹)">
+      <input id="simpleInvestment" type="number" placeholder="Total Investment (₹) (Optional)">
+      <button class="calc-btn" onclick="calcSimple()">Calculate Profit</button>
+      <div id="simpleResult" class="result-area"></div>
+    </div>
+
+    <div id="advancedMode">
+      <h3>Advanced Business Calculator</h3>
+      <input id="advSales" type="number" placeholder="Monthly Sales (₹)">
+      <input id="raw" type="number" placeholder="Raw Material Cost (₹)">
+      <input id="labour" type="number" placeholder="Labour Cost (₹)">
+      <input id="electricity" type="number" placeholder="Electricity & Utilities (₹)">
+      <input id="rent" type="number" placeholder="Rent & Overheads (₹)">
+      <input id="emi" type="number" placeholder="Loan EMI (₹)">
+      <input id="investment" type="number" placeholder="Total Investment (₹)">
+      <button class="calc-btn" onclick="calcAdvanced()">Calculate Detailed Report</button>
+      <div id="advancedResult" class="result-area"></div>
+    </div>
+
+    <hr>
+    <p style="text-align: center;"><a href="privacy.html">Privacy Policy</a></p>
+    <div class="disclaimer">
+      Disclaimer: Results are indicative estimates, not financial or legal advice.
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

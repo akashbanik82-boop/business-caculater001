@@ -1,0 +1,77 @@
+// INITIALIZE
+window.onload = function() {
+    showSimple(); // Set default view
+};
+
+// MODE TOGGLE
+function showSimple() {
+    document.getElementById("simpleMode").style.display = "block";
+    document.getElementById("advancedMode").style.display = "none";
+    document.getElementById("btnSimple").classList.add("active");
+    document.getElementById("btnAdvanced").classList.remove("active");
+}
+
+function showAdvanced() {
+    document.getElementById("simpleMode").style.display = "none";
+    document.getElementById("advancedMode").style.display = "block";
+    document.getElementById("btnAdvanced").classList.add("active");
+    document.getElementById("btnSimple").classList.remove("active");
+}
+
+// SHARED CALCULATION DISPLAY
+function displayFinalMetrics(elementId, sales, cost, investment) {
+    let monthlyProfit = sales - cost;
+    let annualProfit = monthlyProfit * 12;
+    let margin = sales > 0 ? (monthlyProfit / sales) * 100 : 0;
+    let roi = investment > 0 ? (annualProfit / investment) * 100 : 0;
+    let payback = (monthlyProfit > 0 && investment > 0) ? (investment / monthlyProfit).toFixed(1) : "N/A";
+
+    document.getElementById(elementId).innerHTML = `
+        <p><strong>1. Monthly Profit:</strong> ₹${monthlyProfit.toLocaleString()}</p>
+        <p><strong>2. Annual Profit:</strong> ₹${annualProfit.toLocaleString()}</p>
+        <p><strong>3. ROI (Return on Investment):</strong> ${roi.toFixed(2)}%</p>
+        <p><strong>4. Payback Period:</strong> ${payback} Months</p>
+        <p><strong>5. Margin Calculator:</strong> ${margin.toFixed(2)}%</p>
+        
+        <div class="lead-box">
+            <p><strong>6. ⬇️ Download Detailed Business Report (₹499)</strong></p>
+            <input type="email" id="leadEmail" placeholder="Enter your email" style="width: 80%; padding: 8px; margin-bottom: 10px;">
+            <button onclick="handleLead()" style="background:#007bff; color:white; border:none; padding:10px; border-radius:5px; cursor:pointer;">Request Report</button>
+        </div>
+    `;
+}
+
+// BUTTON ACTIONS
+function calcSimple() {
+    let sales = Number(document.getElementById("simpleSales").value);
+    let cost = Number(document.getElementById("simpleCost").value);
+    let investment = Number(document.getElementById("simpleInvestment").value) || 0;
+    
+    if(sales === 0) return alert("Please enter sales");
+    displayFinalMetrics("simpleResult", sales, cost, investment);
+}
+
+function calcAdvanced() {
+    let sales = Number(document.getElementById("advSales").value);
+    let investment = Number(document.getElementById("investment").value);
+    
+    let totalCost = 
+        Number(document.getElementById("raw").value) +
+        Number(document.getElementById("labour").value) +
+        Number(document.getElementById("electricity").value) +
+        Number(document.getElementById("rent").value) +
+        Number(document.getElementById("emi").value);
+
+    if(sales === 0) return alert("Please enter sales");
+    displayFinalMetrics("advancedResult", sales, totalCost, investment);
+}
+
+// LEAD GENERATION (Point 8)
+function handleLead() {
+    let email = document.getElementById("leadEmail").value;
+    if(email.includes("@")) {
+        alert("Success! We will contact you at " + email + " for your ₹499 Detailed Report.");
+    } else {
+        alert("Please enter a valid email address.");
+    }
+}
